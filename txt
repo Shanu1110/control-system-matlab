@@ -285,7 +285,7 @@ ap=flipud(a)
 ap1=fliplr(ap)
 bp=flipud(b)
 cp=fliplr(c)
-[a0,b0,c0,d0]=cannon(a,b,c,d,comparision)
+[a0,b0,c0,d0]=canon(a,b,c,d,'companion')
 
 a=[-2 10;0 -3 j-3 -4 -5]
 b=[0,0,1]
