@@ -1,0 +1,351 @@
+1.zero poles
+num=[4 5 2]
+den=[2 1 0 1]
+sys=tf(num,den)
+[z,p,k]=tf2zpk(num,den)
+sys1=zpk(z,p,k)
+
+
+2.
+num1=[1 0 9]
+num2=[5 2]
+num=conv(num1,num2)
+den1=[1 0 16]
+den2=[3 2]
+den=conv(den1,den2)
+sys=tf(num,den)
+[z,p,k]=tf2zpk(num,den)
+sys1=zpk(z,p,k)
+
+
+3.
+num=[79 916 1000]
+den=[-10 -10 -10]
+den1=poly(den)
+den2=[1 0]
+den3=conv(den1,den2)
+sys=tf(num,den3)
+[z,p,k]=tf2zpk(num,den3)
+sys1=zpk(z,p,k)
+4.
+p1=poly([-1 -2])
+num=p1
+p2=([-3 -4 -5 -2+4*j -2-4*j])
+den=p2
+sys=tf(num,den)
+[z,p,k]=tf2zp(num,den)
+sys1=zpk(z,p,k)
+
+
+5.
+num1=[1 1]
+num2=[1 3]
+num=conv(num1,num2)
+den1=[1 -4]
+den2=[1 -2]
+den3=conv(den1,den2)
+den4=[1 5]
+den5=conv(den3,den4)
+sys=tf(num,den5)
+[z,p,k]=tf2zpk(num,den5)
+sys1=zpk(z,p,k)
+
+
+6.
+num1=[1 5]
+num2=[1 3]
+num3=conv(num1,num2)
+num4=[1 -2]
+num5=conv(num3,num4)
+p1=poly([-1 -6 -5 1-3*j 1+j])
+den=p1
+sys=tf(num5,den)
+[z,p,k]=tf2zpk(num5,den)
+sys1=zpk(z,p,k)
+
+servo motor 2
+clear all
+num1 = [1]
+den1 = [50*10^(-3) 0.75]
+sys1 = tf(num1,den1)
+num2=[1]
+den2 = [50 0 0]
+sys2 = tf(num2,den2)
+sys3 = series(sys1,sys2)
+num3 = [10]
+den3 = [1]
+sys4 = tf(num3,den3)
+sys5= feedback(sys3,sys4,-1)
+step(sys5)  
+
+servo motor 1
+clear all
+num1 = [0 2]
+den1 = [0.9546*10^(-6) 0 0]
+sys1 = tf(num1,den1)
+den2 = [1]
+num2 = [0 0.199 0]
+sys2 = tf(num2,den2)
+sys= feedback(sys1,sys2,-1)
+step(sys)  
+
+pid2
+num = [1 0];
+den = conv([10],[1 0 3]);
+sys1 = tf(num,den);
+num1 = [1 6];
+den1 = conv([10],[1 4 3]);
+controller = tf(num1,den1);
+sys2 = series(sys1,controller);
+sys3 = feedback(sys2,1);
+step(sys3); 
+
+pid1
+kp = 200;
+ki = 300;
+kd = 10;
+c = pid(kp,ki,kd);
+num = 1;
+den = [1 20 30];
+plant = tf(num,den);
+sys1 = series(c,plant);
+sys2 = feedback(sys1,1);
+step(sys2)
+
+nyquist 1
+
+num = [2 5 1]
+den = [1 2 3]
+sys = tf(num,den)
+nyquist(sys)
+[re,im,w] =nyquist(sys);
+
+nq2
+num = [20 20 10]
+den = [0 -1 -10]
+sys = tf(num,den)
+nyquist(sys)
+[re,im,w] = nyquist(sys)
+
+nq3
+num = [2]
+den = [0 -1 -0.5]
+sys = tf(num,den)
+nyquist(sys)
+[re,im,w] = nyquist(sys)
+
+time response 
+t=0:0.01:10;
+num=[5]
+den[21]
+y1=impulse(num,den,t)
+y2=step(num,den,t)
+plot(t,y1)
+plot(t,y2)
+
+
+for step and ramp
+
+t=0:0.01:10;
+num=[5]
+den=conv([21],[54])
+y1=impulse(num,den,t)
+y2=step(num,den,t)
+plot(t,y1)
+plot(t,y2)
+
+## ramp signal
+
+t=0:0.01:10;
+num=[5]
+den=conv([21],[54])
+u=t
+sys=tf(num,den)
+sys1=(sys,u,t)
+
+125
+5（3+5）（3+12）
+unit ramp
+k：125
+z=[]
+P = [ 0 -5 2]
+[num, den] = z p 2tf(z,p,K)
+sys = tf ( sum, den)
+num1 = conv ( [1 ,10] , num)
+sys1 = tf (num1, den)
+KV=degain (sys1))
+error = 1/ KV
+• unit Parabolic: -
+k=125
+z=[]
+P = [0 - 5 + 2)
+[num,denJ=zp2tf（z,p,k）
+sys = tf (num, den)
+• unit Step: -
+k = 125
+z = [)
+p = [0, - 5 + 2)
+[num,den）=Zp2tf（28,4）
+sys = tf ( num, den)
+KP = degain (sys)
+error = 1/(1+ KĐ)
+num 2 = conv ( [1 0], sum)
+sys 2 = tf (num2, den)
+Ka = degain (sys2)
+error = 1/ка
+
+
+familiar with simulink
+
+num=[2]
+den=[3 8]
+sys1=tf(num,den)
+sys2=[1]
+sys3=feedback(sys1,sys2,-1)
+step(sys3)
+
+G =1/5+9
+num1=[1]
+den 1 = [1, 9]
+sys 1 = tf (num 1, deni)
+num 2 = [2 5]
+den 2 = [0,1]
+sy 2 = tf (num 2, denz)
+num 3 = [1]
+den 3 = [1 0)
+Sup 3 = tt (num 3, dem 3)
+2p 4 = paralel (Dys 1, sys 2)
+sys 5 = series (sys) , sys 3)
+sys 6 = fredback (1, sys s, - 1)
+Dys 7 = Deries (sys 4, sys 6)
+step (sys 7)
+
+um=[1]
+den=[1 9]
+sys1=tf(num, den)
+num2=[25]
+sys2=tf(num2)
+num3=[1]
+den3=[1 0]
+sys3=tf(num3,den3)
+sys4=parallel(sys1,sys2)
+sys5=series(sys1,sys3)
+sys6=feedback(1,sys5,-1)
+sys7=series(sys4,sys6)
+step(sys7)
+
+num=[1]
+den=[1 0 0]
+sys1=tf(num, den)
+num2=[50]
+den2=[1 1]
+sys2=tf(num2,den2)
+num3=[2]
+den3=[1 0]
+sys3=tf(num3,den3)
+num4=[1]
+den4=[1 0]
+sys4=tf(num4,den4)
+num5=[2]
+den5=[0 1]
+sys5=tf(num5,den5)
+sys6=feedback(sys2,sys3,-1)
+sys7=parallel(sys4,sys5)
+sys8=series(sys1,sys6)
+sys9=series(sys8,sys7)
+step(sys9)
+Sys10=feedback(1,sys9,-1)
+
+
+root locus
+
+k=1
+z=[]
+p=[0,-1,-2]            p=[0,-4,-2-4j,-2+4j]
+sys=zpk(z,p,k)
+rlocus(sys)
+k=rlocfind(sys)
+
+bode plot
+
+k=80                    // num=[50 50]
+den=poly([0 -2 -20])
+num=[k]
+sys=tf(num,den)
+bode(sys)
+[gm,pm]=margin(sys)
+
+
+state space model
+
+num=[1 12]
+den=[1 9 26 24]
+[a,b,c,d]=tf2ss(num,den)
+ap=flipud(a)
+ap1=fliplr(ap)
+bp=flipud(b)
+cp=fliplr(c)
+[a0,b0,c0,d0]=cannon(a,b,c,d,comparision)
+
+a=[-2 10;0 -3 j-3 -4 -5]
+b=[0,0,1]
+c=[0 0 1]
+d=[0]
+[num,den]=ss2tf(a,b,c,d)
+poitn sys(num,den)
+step(a,b,c,d)
+
+a=[1-1;1-1]
+b=[0;1]
+c=[1 0]
+m=obsv[a,c]
+r=rank(m)
+if(r==2)
+disp('observable')
+else
+disp('unobservable')
+end
+
+
+a=[-10;1-2]
+b=[1;1]
+cb=ctrb(a,b)
+r=rank(cb)
+if(r==2)
+disp('observable')
+else
+disp('unobservable')
+end
+
+second order response
+
+пum = [ 16)
+den [ 1 1.6 16]
+y = step (num, den. t)
+plot ( t, y)
+[ уmax. tР =max(y)
+peak over shoot = (ymax - 1) * 100
+For rise time? -
+R1= 1
+whie y（r1）<=0.1
+end
+
+r2=1
+while y (r2) < = 0•9
+r2=r2+1
+end
+risetime=(r2-r1)*0.01
+
+For setting Time ! —
+s=200
+while y (s) › =0. 988y (s)<=1.02
+s=s-1
+end
+settling time=(s-1)*0.01
+
+delay time 
+r3=1
+while y(r3)<=0.5
+r3=r3+1
+end
+delaytime(r3-1)*0.01
